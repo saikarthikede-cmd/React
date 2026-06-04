@@ -1,0 +1,24 @@
+.table-wrapper { max-height: 400px; overflow-y: auto; }
+
+.task-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.task-table thead tr { border-bottom: 1px solid #f0f0f0; }
+.task-table th  { text-align: left; padding: 10px 12px; font-size: 14px; color: #999; font-weight: 500; }
+.task-table tbody tr { border-bottom: 1px solid #f8f8f8; }
+.task-table tbody tr:hover { background: #fafafa; }
+.task-table td  { padding: 14px 12px; font-size: 14px; color: #333; }
+
+.task-table th:nth-child(1), .task-table td:nth-child(1) { width: 90px; }
+.task-table th:nth-child(3), .task-table td:nth-child(3) { width: 130px; }
+.task-table th:nth-child(4), .task-table td:nth-child(4) { width: 150px; }
+.task-table td:nth-child(2) { word-break: break-word; }
+
+.key-col { color: #999; font-size: 13px; }
+.empty-row { text-align: center; color: #bbb; padding: 30px 0; }
+
+body.dark .task-table thead tr { border-bottom-color: #2a2a3e; }
+body.dark .task-table th        { color: #777; }
+body.dark .task-table tbody tr  { border-bottom-color: #2a2a3e; }
+body.dark .task-table tbody tr:hover { background: #252535; }
+body.dark .task-table td        { color: #d0d0d0; }
+body.dark .key-col              { color: #666; }
+body.dark .empty-row            { color: #555; }

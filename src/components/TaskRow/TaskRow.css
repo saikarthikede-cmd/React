@@ -1,0 +1,21 @@
+.action-col { display: flex; gap: 6px; align-items: center; }
+
+.edit-row-btn    { background: #2563eb; color: white; border: none; border-radius: 5px; padding: 4px 12px; font-size: 12px; cursor: pointer; font-weight: 500; }
+.edit-row-btn:hover    { background: #1d4ed8; }
+.delete-row-btn  { background: #e94560; color: white; border: none; border-radius: 5px; padding: 4px 12px; font-size: 12px; cursor: pointer; font-weight: 500; }
+.delete-row-btn:hover  { background: #c73652; }
+.save-row-btn    { background: #16a34a; color: white; border: none; border-radius: 5px; padding: 4px 10px; font-size: 12px; cursor: pointer; font-weight: 500; }
+.save-row-btn:hover    { background: #15803d; }
+.cancel-row-btn  { background: transparent; color: #888; border: 1px solid #e0e0e0; border-radius: 5px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+.cancel-row-btn:hover  { background: #f0f0f0; }
+
+.edit-input  { width: 100%; padding: 4px 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; outline: none; }
+.edit-input:focus { border-color: #2563eb; }
+.edit-select { padding: 4px 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; background: white; outline: none; cursor: pointer; }
+
+body.dark .edit-input,
+body.dark .edit-select    { background: #2a2a3e; border-color: #3a3a52; color: #e0e0e0; }
+body.dark .cancel-row-btn { border-color: #3a3a52; color: #aaa; }
+body.dark .cancel-row-btn:hover { background: #2a2a3e; }
+body.dark .delete-row-btn { background: #e94560; }
+body.dark .delete-row-btn:hover { background: #c73652; }

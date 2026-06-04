@@ -1,0 +1,125 @@
+/* ── navbar ── */
+.navbar {
+  background: #1a1a2e;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+}
+
+.nav-left  { display: flex; align-items: center; gap: 10px; }
+.nav-middle { display: flex; gap: 10px; }
+.nav-right  { display: flex; align-items: center; gap: 16px; }
+
+.logo {
+  width: 36px; height: 36px;
+  background: #e94560; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 18px;
+}
+
+.site-name { font-size: 20px; font-weight: bold; }
+
+.nav-btn {
+  background: transparent; color: white;
+  border: none; padding: 8px 20px;
+  font-size: 15px; cursor: pointer; border-radius: 5px;
+}
+.nav-btn:hover, .nav-btn.active { background: #e94560; }
+
+.theme-btn {
+  background: transparent; color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 13px; cursor: pointer;
+}
+.theme-btn:hover { background: rgba(255,255,255,0.1); }
+
+.profile { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 15px; }
+
+.avatar {
+  width: 34px; height: 34px;
+  background: #e94560; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 15px; color: white;
+}
+
+/* ── overlay ── */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1001;
+}
+
+/* ── slide-in panel ── */
+.panel {
+  position: fixed; top: 0; right: -380px;
+  width: 360px; height: 100vh;
+  background: white; z-index: 1002;
+  transition: right 0.3s ease;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+  display: flex; flex-direction: column;
+}
+.panel.open { right: 0; }
+
+.panel-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 20px; background: #1a1a2e; color: white;
+  position: relative;
+}
+.panel-avatar {
+  width: 48px; height: 48px; background: #e94560;
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-weight: bold; font-size: 18px; color: white; flex-shrink: 0;
+}
+.panel-name { font-size: 16px; font-weight: 600; }
+.panel-sub  { font-size: 12px; color: rgba(255,255,255,0.6); }
+.panel-close {
+  position: absolute; top: 18px; right: 18px;
+  background: transparent; border: none; color: white; font-size: 18px; cursor: pointer;
+}
+
+.panel-body {
+  padding: 20px; display: flex; flex-direction: column; gap: 6px; overflow-y: auto;
+}
+.panel-body label { font-size: 12px; font-weight: 600; color: #888; text-transform: uppercase; margin-top: 8px; }
+.panel-body input {
+  padding: 9px 12px; border: 1px solid #e0e0e0;
+  border-radius: 8px; font-size: 14px; outline: none;
+}
+.panel-body input:focus { border-color: #2563eb; }
+
+.avatar-preview {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; background: #f9f9f9;
+  border-radius: 8px; border: 1px dashed #e0e0e0; margin-top: 10px;
+}
+.avatar-preview span { font-size: 13px; color: #888; }
+.avatar-preview .avatar { width: 40px; height: 40px; font-size: 14px; }
+
+.save-btn {
+  margin-top: 14px; padding: 10px;
+  background: #1a1a2e; color: white;
+  border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.save-btn:hover { background: #2e2e4e; }
+
+.cancel-btn {
+  padding: 10px; background: transparent; color: #888;
+  border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; cursor: pointer;
+}
+.cancel-btn:hover { background: #f5f5f5; }
+
+/* ── dark mode ── */
+body.dark .panel        { background: #1e1e2e; }
+body.dark .panel-body   { background: #1e1e2e; }
+body.dark .panel-body input  { background: #2a2a3e; border-color: #3a3a52; color: #e0e0e0; }
+body.dark .panel-body label  { color: #777; }
+body.dark .avatar-preview    { background: #252535; border-color: #3a3a52; }
+body.dark .avatar-preview span { color: #777; }
+body.dark .cancel-btn        { border-color: #3a3a52; color: #aaa; }
+body.dark .cancel-btn:hover  { background: #2a2a3e; }
