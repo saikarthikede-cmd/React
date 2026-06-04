@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import StatusBadge from '../StatusBadge/StatusBadge'
+import TaskTable from '../TaskTable/TaskTable'
 import './TasksPage.css'
 
 function TasksPage() {
@@ -8,20 +8,15 @@ function TasksPage() {
     var saved = localStorage.getItem('tasks')
     return saved ? JSON.parse(saved) : []
   })
-
   var [nextId, setNextId] = useState(function() {
     var saved = localStorage.getItem('nextId')
     return saved ? parseInt(saved) : 1
   })
-
   var [activeTab, setActiveTab] = useState('all')
   var [search, setSearch]       = useState('')
   var [showForm, setShowForm]   = useState(false)
   var [newName, setNewName]     = useState('')
   var [newStatus, setNewStatus] = useState('todo')
-  var [editId, setEditId]       = useState(null)
-  var [editName, setEditName]   = useState('')
-  var [editStatus, setEditStatus] = useState('todo')
 
   useEffect(function() {
     localStorage.setItem('tasks', JSON.stringify(tasks))
@@ -30,37 +25,43 @@ function TasksPage() {
 
   function addTask() {
     if (newName.trim() == '') { alert('Enter a task name'); return }
-    setTasks([...tasks, { id: nextId, key: 'TSK-' + nextId, name: newName, status: newStatus }])
+    setTasks([...tasks, { id: nextId, key: 'TSK-' + nextId, name: newName.trim(), status: newStatus }])
     setNextId(nextId + 1)
-    setNewName('')
-    setNewStatus('todo')
-    setShowForm(false)
+    setNewName(''); setNewStatus('todo'); setShowForm(false)
   }
 
   function deleteTask(id) {
-    setTasks(tasks.filter(function(t) { return t.id != id }))
+    var updated = []
+    for (var i = 0; i < tasks.length; i++) {
+      if (tasks[i].id != id) updated.push(tasks[i])
+    }
+    setTasks(updated)
   }
 
-  function startEdit(task) {
-    setEditId(task.id)
-    setEditName(task.name)
-    setEditStatus(task.status)
+  function saveEdit(id, name, status) {
+    var updated = []
+    for (var i = 0; i < tasks.length; i++) {
+      if (tasks[i].id == id) updated.push({ ...tasks[i], name: name, status: status })
+      else updated.push(tasks[i])
+    }
+    setTasks(updated)
+    return true
   }
 
-  function saveEdit(id) {
-    if (editName.trim() == '') return
-    setTasks(tasks.map(function(t) {
-      return t.id == id ? { ...t, name: editName, status: editStatus } : t
-    }))
-    setEditId(null)
+  // filter tasks
+  var filtered = []
+  for (var i = 0; i < tasks.length; i++) {
+    var t = tasks[i]
+    if ((activeTab == 'all' || t.status == activeTab) && t.name.toLowerCase().includes(search.toLowerCase())) {
+      filtered.push(t)
+    }
   }
 
-  var filtered = tasks.filter(function(t) {
-    return (activeTab == 'all' || t.status == activeTab) &&
-           t.name.toLowerCase().includes(search.toLowerCase())
-  })
-
-  var doneCount = tasks.filter(function(t) { return t.status == 'done' }).length
+  // count done
+  var doneCount = 0
+  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].status == 'done') doneCount++
+  }
 
   return (
     <div className="tasks-page">
@@ -81,7 +82,7 @@ function TasksPage() {
 
         <div className="toolbar">
           <div className="search-bar">
-            <span className="search-icon">&#128269;</span>
+            <span>&#128269;</span>
             <input type="text" placeholder="Search tasks..." value={search} onChange={function(e) { setSearch(e.target.value) }} />
           </div>
           <button className="add-task-btn" onClick={function() { setShowForm(!showForm) }}>+ Add Task</button>
@@ -103,53 +104,7 @@ function TasksPage() {
           </div>
         )}
 
-        <div className="table-wrapper">
-          <table className="task-table">
-            <thead>
-              <tr><th>Key</th><th>Name</th><th>Status</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-              {filtered.map(function(task) {
-                var isEditing = editId == task.id
-                return (
-                  <tr key={task.id}>
-                    <td className="key-col">{task.key}</td>
-                    <td>
-                      {isEditing
-                        ? <input className="edit-name-input" value={editName} autoFocus onChange={function(e) { setEditName(e.target.value) }} />
-                        : task.name}
-                    </td>
-                    <td>
-                      {isEditing
-                        ? <select className="edit-status-select" value={editStatus} onChange={function(e) { setEditStatus(e.target.value) }}>
-                            <option value="todo">To Do</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="done">Done</option>
-                          </select>
-                        : <StatusBadge status={task.status} />}
-                    </td>
-                    <td className="action-col">
-                      {isEditing ? (
-                        <div>
-                          <button className="save-row-btn"   onClick={function() { saveEdit(task.id) }}>Save</button>
-                          <button className="cancel-row-btn" onClick={function() { setEditId(null) }}>Cancel</button>
-                        </div>
-                      ) : (
-                        <div>
-                          <button className="edit-row-btn"   onClick={function() { startEdit(task) }}>Edit</button>
-                          <button className="delete-row-btn" onClick={function() { deleteTask(task.id) }}>Delete</button>
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                )
-              })}
-              {filtered.length == 0 && (
-                <tr><td colSpan="4" className="empty-row">No tasks found</td></tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+        <TaskTable tasks={filtered} onSave={saveEdit} onDelete={deleteTask} />
 
       </div>
     </div>
