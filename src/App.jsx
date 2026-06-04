@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
-
-import Navbar from './Navbar'
-import HomePage from './HomePage'
-import TasksPage from './TasksPage'
+import Navbar from './components/Navbar/Navbar'
+import HomePage from './components/HomePage/HomePage'
+import TasksPage from './components/TasksPage/TasksPage'
 
 function App() {
 
@@ -11,11 +10,8 @@ function App() {
   var [darkMode, setDarkMode] = useState(false)
 
   useEffect(function() {
-    if (darkMode) {
-      document.body.classList.add("dark")
-    } else {
-      document.body.classList.remove("dark")
-    }
+    if (darkMode) document.body.classList.add("dark")
+    else document.body.classList.remove("dark")
   }, [darkMode])
 
   function toggleTheme() {

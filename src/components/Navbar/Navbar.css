@@ -1,0 +1,44 @@
+.navbar {
+  background-color: #1a1a2e;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left  { display: flex; align-items: center; gap: 10px; }
+.nav-middle { display: flex; gap: 10px; }
+.nav-right  { display: flex; align-items: center; gap: 16px; }
+
+.logo {
+  width: 36px; height: 36px;
+  background-color: #e94560; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 18px;
+}
+
+.site-name { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
+
+.nav-btn {
+  background: transparent; color: white;
+  border: none; padding: 8px 20px;
+  font-size: 15px; cursor: pointer; border-radius: 5px;
+}
+.nav-btn:hover, .nav-btn.active { background-color: #e94560; }
+
+.theme-btn {
+  background: transparent; color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer;
+}
+.theme-btn:hover { background: rgba(255,255,255,0.1); }
+
+.profile { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+
+.avatar {
+  width: 34px; height: 34px;
+  background-color: #e94560; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 16px;
+}

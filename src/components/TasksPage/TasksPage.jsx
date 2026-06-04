@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import StatusBadge from './StatusBadge'
+import StatusBadge from '../StatusBadge/StatusBadge'
+import './TasksPage.css'
 
 function TasksPage() {
 
@@ -14,12 +15,12 @@ function TasksPage() {
   })
 
   var [activeTab, setActiveTab] = useState('all')
-  var [search, setSearch] = useState('')
-  var [showForm, setShowForm] = useState(false)
-  var [newName, setNewName] = useState('')
+  var [search, setSearch]       = useState('')
+  var [showForm, setShowForm]   = useState(false)
+  var [newName, setNewName]     = useState('')
   var [newStatus, setNewStatus] = useState('todo')
-  var [editId, setEditId] = useState(null)
-  var [editName, setEditName] = useState('')
+  var [editId, setEditId]       = useState(null)
+  var [editName, setEditName]   = useState('')
   var [editStatus, setEditStatus] = useState('todo')
 
   useEffect(function() {
@@ -71,10 +72,10 @@ function TasksPage() {
             <p className="task-count">{tasks.length} tasks &nbsp;·&nbsp; {doneCount} done</p>
           </div>
           <div className="tabs">
-            <button className={activeTab == 'all' ? 'tab active' : 'tab'} onClick={function() { setActiveTab('all') }}>All</button>
+            <button className={activeTab == 'all'         ? 'tab active' : 'tab'} onClick={function() { setActiveTab('all') }}>All</button>
             <button className={activeTab == 'in-progress' ? 'tab active' : 'tab'} onClick={function() { setActiveTab('in-progress') }}>In Progress</button>
-            <button className={activeTab == 'todo' ? 'tab active' : 'tab'} onClick={function() { setActiveTab('todo') }}>Todo</button>
-            <button className={activeTab == 'done' ? 'tab active' : 'tab'} onClick={function() { setActiveTab('done') }}>Done</button>
+            <button className={activeTab == 'todo'        ? 'tab active' : 'tab'} onClick={function() { setActiveTab('todo') }}>Todo</button>
+            <button className={activeTab == 'done'        ? 'tab active' : 'tab'} onClick={function() { setActiveTab('done') }}>Done</button>
           </div>
         </div>
 
@@ -105,27 +106,19 @@ function TasksPage() {
         <div className="table-wrapper">
           <table className="task-table">
             <thead>
-              <tr>
-                <th>Key</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
+              <tr><th>Key</th><th>Name</th><th>Status</th><th>Actions</th></tr>
             </thead>
             <tbody>
               {filtered.map(function(task) {
                 var isEditing = editId == task.id
                 return (
                   <tr key={task.id}>
-
                     <td className="key-col">{task.key}</td>
-
                     <td>
                       {isEditing
                         ? <input className="edit-name-input" value={editName} autoFocus onChange={function(e) { setEditName(e.target.value) }} />
                         : task.name}
                     </td>
-
                     <td>
                       {isEditing
                         ? <select className="edit-status-select" value={editStatus} onChange={function(e) { setEditStatus(e.target.value) }}>
@@ -135,21 +128,19 @@ function TasksPage() {
                           </select>
                         : <StatusBadge status={task.status} />}
                     </td>
-                    
                     <td className="action-col">
                       {isEditing ? (
                         <div>
-                          <button className="save-row-btn" onClick={function() { saveEdit(task.id) }}>Save</button>
+                          <button className="save-row-btn"   onClick={function() { saveEdit(task.id) }}>Save</button>
                           <button className="cancel-row-btn" onClick={function() { setEditId(null) }}>Cancel</button>
                         </div>
                       ) : (
                         <div>
-                          <button className="edit-row-btn" onClick={function() { startEdit(task) }}>Edit</button>
+                          <button className="edit-row-btn"   onClick={function() { startEdit(task) }}>Edit</button>
                           <button className="delete-row-btn" onClick={function() { deleteTask(task.id) }}>Delete</button>
                         </div>
                       )}
                     </td>
-
                   </tr>
                 )
               })}
