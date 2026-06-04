@@ -67,6 +67,21 @@ body {
 .nav-right {
   display: flex;
   align-items: center;
+  gap: 16px;
+}
+
+.theme-btn {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.theme-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .profile {
@@ -180,7 +195,20 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* search bar */
+.task-count {
+  font-size: 13px;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* toolbar: search + add button */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
 
 .search-bar {
   display: flex;
@@ -190,7 +218,6 @@ body {
   border-radius: 20px;
   padding: 8px 16px;
   width: 260px;
-  margin-bottom: 24px;
 }
 
 .search-bar input {
@@ -206,11 +233,33 @@ body {
   color: #999;
 }
 
+.add-task-btn {
+  padding: 8px 18px;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.add-task-btn:hover {
+  background: #2e2e4e;
+}
+
+/* table wrapper - limits height and adds scroll */
+
+.table-wrapper {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 /* table */
 
 .task-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .task-table thead tr {
@@ -242,7 +291,15 @@ body {
 .key-col {
   color: #999;
   font-size: 13px;
-  width: 90px;
+}
+
+.task-table th:nth-child(1) { width: 90px; }
+.task-table th:nth-child(2) { width: auto; }
+.task-table th:nth-child(3) { width: 130px; }
+.task-table th:nth-child(4) { width: 140px; }
+
+.task-table td:nth-child(2) {
+  word-break: break-word;
 }
 
 /* status badges */
@@ -269,42 +326,95 @@ body {
   color: #6b7280;
 }
 
-/* + button in table header */
 
-.add-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #111;
+/* action column */
+
+.action-col {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.edit-row-btn {
+  background: #2563eb;
   color: white;
   border: none;
-  font-size: 18px;
+  border-radius: 5px;
+  padding: 4px 12px;
+  font-size: 12px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  font-weight: 500;
 }
 
-.add-btn:hover {
-  background: #333;
+.edit-row-btn:hover {
+  background: #1d4ed8;
 }
-
-/* delete row button */
 
 .delete-row-btn {
-  background: transparent;
+  background: #e94560;
+  color: white;
   border: none;
-  color: #ccc;
+  border-radius: 5px;
+  padding: 4px 12px;
+  font-size: 12px;
   cursor: pointer;
-  font-size: 13px;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-weight: 500;
 }
 
 .delete-row-btn:hover {
-  color: #e94560;
-  background: #fff0f3;
+  background: #c73652;
+}
+
+.save-row-btn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.save-row-btn:hover {
+  background: #15803d;
+}
+
+.cancel-row-btn {
+  background: transparent;
+  color: #888;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.cancel-row-btn:hover {
+  background: #f0f0f0;
+}
+
+.edit-name-input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+.edit-name-input:focus {
+  border-color: #2563eb;
+}
+
+.edit-status-select {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  background: white;
 }
 
 .empty-row {
@@ -336,7 +446,7 @@ body {
 }
 
 .add-form input:focus {
-  border-color: #aaa;
+  border-color: #2563eb;
 }
 
 .add-form select {
@@ -375,4 +485,149 @@ body {
 
 .form-cancel-btn:hover {
   background: #f0f0f0;
+}
+
+/* ── dark mode ── */
+
+body.dark {
+  background-color: #0f0f1a;
+  color: #e0e0e0;
+}
+
+body.dark .home-container h1 {
+  color: #e0e0e0;
+}
+
+body.dark .home-container p {
+  color: #aaa;
+}
+
+body.dark .tasks-card {
+  background: #1e1e2e;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .tasks-header h2 {
+  color: #f0f0f0;
+}
+
+body.dark .tabs {
+  background: #2a2a3e;
+}
+
+body.dark .tab {
+  color: #aaa;
+}
+
+body.dark .tab:hover {
+  background: #33334a;
+}
+
+body.dark .tab.active {
+  background: #3a3a52;
+  color: #f0f0f0;
+}
+
+body.dark .search-bar {
+  border-color: #3a3a52;
+  background: #2a2a3e;
+}
+
+body.dark .search-bar input {
+  color: #e0e0e0;
+}
+
+body.dark .task-table thead tr {
+  border-bottom-color: #2a2a3e;
+}
+
+body.dark .task-table th {
+  color: #777;
+}
+
+body.dark .task-table tbody tr {
+  border-bottom-color: #2a2a3e;
+}
+
+body.dark .task-table tbody tr:hover {
+  background: #252535;
+}
+
+body.dark .task-table td {
+  color: #d0d0d0;
+}
+
+body.dark .key-col {
+  color: #666;
+}
+
+body.dark .badge-in-progress {
+  background: #14532d;
+  color: #4ade80;
+}
+
+body.dark .badge-todo {
+  background: #1e3a5f;
+  color: #60a5fa;
+}
+
+body.dark .badge-done {
+  background: #2a2a3e;
+  color: #888;
+}
+
+body.dark .add-btn {
+  background: #e94560;
+}
+
+body.dark .edit-name-input,
+body.dark .edit-status-select {
+  background: #2a2a3e;
+  border-color: #3a3a52;
+  color: #e0e0e0;
+}
+
+body.dark .cancel-row-btn {
+  border-color: #3a3a52;
+  color: #aaa;
+}
+
+body.dark .cancel-row-btn:hover {
+  background: #2a2a3e;
+}
+
+body.dark .add-form {
+  background: #252535;
+  border-color: #3a3a52;
+}
+
+body.dark .add-form input,
+body.dark .add-form select {
+  background: #2a2a3e;
+  border-color: #3a3a52;
+  color: #e0e0e0;
+}
+
+body.dark .empty-row {
+  color: #555;
+}
+
+body.dark .task-count {
+  color: #666;
+}
+
+body.dark .add-task-btn {
+  background: #e94560;
+}
+
+body.dark .add-task-btn:hover {
+  background: #c73652;
+}
+
+body.dark .delete-row-btn {
+  background: #e94560;
+}
+
+body.dark .delete-row-btn:hover {
+  background: #c73652;
 }
