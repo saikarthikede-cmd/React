@@ -1,0 +1,7 @@
+.container { width: 400px; margin: 50px auto; background-color: white; padding: 30px; border-radius: 10px; text-align: center; }
+.container h1 { color: #333333; margin-bottom: 20px; }
+
+input  { width: 200px; padding: 8px; font-size: 15px; border: 1px solid #cccccc; border-radius: 5px; }
+button { padding: 8px 12px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer; }
+
+ul { padding: 0; max-height: 300px; overflow-y: auto; }
